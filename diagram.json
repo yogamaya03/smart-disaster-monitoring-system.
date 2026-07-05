@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "author": "8062_YOGAMAYA T",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 28.8, "left": 33.64, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -76.5,
+      "left": 167.4,
+      "attrs": { "temperature": "-16.8", "humidity": "16" }
+    },
+    { "type": "wokwi-gas-sensor", "id": "gas1", "top": 146.7, "left": -146.6, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": -20.5, "left": -67.4, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 186.35,
+      "left": 172.8,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 133.2,
+      "left": 275.4,
+      "rotate": 90,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -55.2,
+      "left": 241.8,
+      "attrs": { "volume": "0.8" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:SDA", "esp:4", "green", [ "v0" ] ],
+    [
+      "dht1:VCC",
+      "esp:3V3",
+      "red",
+      [ "v0", "h-19.2", "v-57.6", "h0", "v-28.8", "h-144", "v-19.2" ]
+    ],
+    [ "gas1:VCC", "esp:5V", "red", [ "h19.2", "v18.3" ] ],
+    [ "gas1:GND", "esp:GND.1", "black", [ "h48", "v-0.8" ] ],
+    [ "gas1:DOUT", "esp:33", "green", [ "h19.2", "v-0.3" ] ],
+    [ "gas1:AOUT", "esp:34", "green", [ "h9.6", "v-67.2" ] ],
+    [ "pot1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "pot1:SIG", "esp:35", "green", [ "v0" ] ],
+    [ "pot1:GND", "esp:GND.1", "black", [ "v96", "h57.6", "v38.4" ] ],
+    [ "r1:1", "esp:2", "green", [ "v0", "h-38.4" ] ],
+    [ "dht1:GND", "esp:GND.2", "black", [ "v19.2", "h-76.8" ] ],
+    [ "esp:GND.2", "bz1:2", "black", [ "v0", "h144" ] ],
+    [ "bz1:1", "esp:18", "green", [ "v57.6", "h-57.6", "v9.6" ] ],
+    [ "led1:A", "r1:2", "green", [ "h-19.2", "v19.2" ] ],
+    [ "led1:C", "esp:GND.3", "green", [ "h-19.2", "v-38" ] ]
+  ],
+  "dependencies": {}
+}
